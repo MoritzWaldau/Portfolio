@@ -1,0 +1,65 @@
+.site-navbar {
+    background-color: rgba(14, 42, 71, 0.72);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    backdrop-filter: blur(14px) saturate(160%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    transition: background-color 0.3s var(--ease-material),
+                box-shadow 0.3s var(--ease-material),
+                padding 0.3s var(--ease-material);
+}
+
+/* verdichtet sich beim Scrollen (Klasse setzt js/site.js) */
+.site-navbar.scrolled {
+    background-color: rgba(14, 42, 71, 0.9);
+    box-shadow: 0 4px 24px rgba(14, 42, 71, 0.35);
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+}
+
+.navbar-brand {
+    letter-spacing: 0.02em;
+}
+
+::deep .nav-link {
+    color: rgba(255, 255, 255, 0.8);
+    position: relative;
+}
+
+::deep .nav-link:hover {
+    color: #fff;
+}
+
+/* wachsende Underline */
+::deep .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0.5rem;
+    right: 0.5rem;
+    bottom: 0.2rem;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s var(--ease-material);
+}
+
+::deep .nav-link:hover::after {
+    transform: scaleX(1);
+}
+
+/* Scrollspy: aktiver Abschnitt (Klasse setzt js/site.js) */
+::deep .nav-link.active {
+    color: #fff;
+}
+
+::deep .nav-link.active::after {
+    transform: scaleX(1);
+}
+
+::deep .nav-cta {
+    color: var(--color-accent-light);
+    font-weight: 600;
+}

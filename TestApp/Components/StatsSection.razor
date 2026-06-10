@@ -1,0 +1,15 @@
+<section class="section-stats" aria-label="Kennzahlen">
+    <div class="container">
+        <div class="row g-3">
+            @foreach (var (stat, index) in SiteContent.Stats.Select((s, i) => (s, i)))
+            {
+                <div class="col-6 col-md-3 reveal" style="--reveal-delay: @index">
+                    <div class="stat-card">
+                        <div class="stat-value" data-count-to="@stat.Value" data-suffix="@stat.Suffix">0@(stat.Suffix)</div>
+                        <div class="stat-label">@stat.Label</div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

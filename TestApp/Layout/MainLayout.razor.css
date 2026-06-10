@@ -1,0 +1,28 @@
+.site {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+    /* Platz für die fixierte Navbar */
+    padding-top: 4rem;
+}
+
+.site-footer {
+    background-color: var(--color-ink);
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(138, 185, 255, 0.25);
+}
+
+.site-footer a {
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+}
+
+.site-footer a:hover {
+    color: #fff;
+    text-decoration: underline;
+}

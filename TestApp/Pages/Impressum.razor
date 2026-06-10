@@ -1,0 +1,31 @@
+@page "/impressum"
+
+<PageTitle>Impressum – @SiteContent.Name</PageTitle>
+
+<section class="section">
+    <div class="container legal-page">
+        <h1 class="section-title no-reveal">Impressum</h1>
+
+        <div class="glass-panel col-lg-8">
+            <h2 class="h5 mt-0">Angaben gemäß § 5 DDG</h2>
+            <p>
+                @SiteContent.Impressum.FullName<br />
+                @SiteContent.Impressum.Street<br />
+                @SiteContent.Impressum.City
+            </p>
+
+            <h2 class="h5">Kontakt</h2>
+            <p>
+                Telefon: @SiteContent.Impressum.Phone<br />
+                E-Mail: <a href="mailto:@SiteContent.Email">@SiteContent.Email</a>
+            </p>
+
+            <h2 class="h5">Verantwortlich für den Inhalt</h2>
+            <p>
+                @SiteContent.Impressum.FullName<br />
+                @SiteContent.Impressum.Street<br />
+                @SiteContent.Impressum.City
+            </p>
+        </div>
+    </div>
+</section>

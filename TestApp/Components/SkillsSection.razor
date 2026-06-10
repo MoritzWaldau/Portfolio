@@ -1,0 +1,23 @@
+<section id="skills" class="section section-alt">
+    <div class="container">
+        <h2 class="section-title reveal">Skills</h2>
+        <div class="row g-4">
+            @foreach (var (group, index) in SiteContent.SkillGroups.Select((g, i) => (g, i)))
+            {
+                <div class="col-md-4 reveal" style="--reveal-delay: @index">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title h5">@group.Title</h3>
+                            <div class="d-flex flex-wrap gap-2 mt-3">
+                                @foreach (var skill in group.Skills)
+                                {
+                                    <span class="badge skill-badge">@skill</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

@@ -1,0 +1,64 @@
+@inherits LayoutComponentBase
+@implements IDisposable
+@using TestApp.Data
+@inject NavigationManager Nav
+@inject IJSRuntime JS
+
+<div class="site">
+    <div class="ambient" aria-hidden="true">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <NavMenu />
+
+    <main>
+        @Body
+    </main>
+
+    <footer class="site-footer">
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 py-4">
+            <span>© @DateTime.Now.Year @SiteContent.Name</span>
+            <nav class="d-flex gap-3">
+                @if (SiteContent.IsProvided(SiteContent.GitHubUrl))
+                {
+                    <a href="@SiteContent.GitHubUrl" target="_blank" rel="noopener">GitHub</a>
+                }
+                @if (SiteContent.IsProvided(SiteContent.LinkedInUrl))
+                {
+                    <a href="@SiteContent.LinkedInUrl" target="_blank" rel="noopener">LinkedIn</a>
+                }
+                <a href="impressum">Impressum</a>
+                <a href="datenschutz">Datenschutz</a>
+            </nav>
+        </div>
+    </footer>
+</div>
+
+@code {
+    // Der Blazor-Router scrollt bei Anker-Links (z.B. /#projekte) nicht selbst zur Sektion.
+    protected override void OnInitialized() => Nav.LocationChanged += OnLocationChanged;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await ScrollToFragmentAsync();
+        }
+    }
+
+    private async void OnLocationChanged(object? sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)
+        => await ScrollToFragmentAsync();
+
+    private async Task ScrollToFragmentAsync()
+    {
+        var fragment = new Uri(Nav.Uri).Fragment;
+        if (fragment.Length > 1)
+        {
+            await JS.InvokeVoidAsync("scrollToFragment", fragment[1..]);
+        }
+    }
+
+    public void Dispose() => Nav.LocationChanged -= OnLocationChanged;
+}

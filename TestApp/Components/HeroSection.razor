@@ -1,0 +1,36 @@
+@using System.Text.Json
+
+<section id="start" class="hero">
+    <canvas class="hero-canvas" aria-hidden="true"></canvas>
+    <div class="container">
+        <div class="row align-items-center gy-4">
+            <div class="col-md-8">
+                <p class="hero-kicker mb-2 hero-anim hero-anim-1">@SiteContent.JobTitle</p>
+                <h1 class="hero-name split-letters">@SiteContent.Name</h1>
+                <p class="hero-tagline hero-anim hero-anim-3">
+                    Ich gestalte <span class="tw-word" data-typewriter="@TypewriterJson">@SiteContent.TypewriterWords[0]</span><span class="tw-caret" aria-hidden="true"></span>
+                </p>
+                <div class="d-flex gap-3 mt-4 hero-anim hero-anim-4">
+                    <a class="btn btn-accent btn-lg" href="/#kontakt">Kontakt aufnehmen</a>
+                    <a class="btn btn-outline-light btn-lg" href="/#projekte">Projekte ansehen</a>
+                </div>
+            </div>
+            <div class="col-md-4 text-center hero-anim hero-anim-5">
+                <div class="hero-portrait-wrap">
+                    <div class="hero-portrait">
+                        <img src="@SiteContent.PortraitPath" alt="Porträt von @SiteContent.Name"
+                             onerror="this.closest('.hero-portrait').classList.add('no-photo')" />
+                        <span class="hero-initials" aria-hidden="true">@Initials</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@code {
+    private static string Initials => string.Concat(
+        SiteContent.Name.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(p => p[0]));
+
+    private static string TypewriterJson => JsonSerializer.Serialize(SiteContent.TypewriterWords);
+}

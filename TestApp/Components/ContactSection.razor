@@ -1,0 +1,28 @@
+<section id="kontakt" class="section section-contact text-center">
+    <div class="container reveal">
+        <h2 class="section-title">Kontakt</h2>
+        <p class="lead mb-4">
+            Sie haben ein Projekt oder eine Frage? Ich freue mich auf Ihre Nachricht.
+        </p>
+        <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center gap-3">
+            <span class="glow-border">
+                <a class="btn btn-accent btn-lg" href="mailto:@SiteContent.Email">@SiteContent.Email</a>
+            </span>
+            <a class="btn btn-outline-primary btn-lg" href="@PhoneHref">@SiteContent.Phone</a>
+        </div>
+        <div class="d-flex justify-content-center gap-4 mt-4">
+            @if (SiteContent.IsProvided(SiteContent.GitHubUrl))
+            {
+                <a href="@SiteContent.GitHubUrl" target="_blank" rel="noopener">GitHub</a>
+            }
+            @if (SiteContent.IsProvided(SiteContent.LinkedInUrl))
+            {
+                <a href="@SiteContent.LinkedInUrl" target="_blank" rel="noopener">LinkedIn</a>
+            }
+        </div>
+    </div>
+</section>
+
+@code {
+    private static string PhoneHref => "tel:" + SiteContent.Phone.Replace(" ", "");
+}
