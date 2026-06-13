@@ -8,23 +8,24 @@ public static class SiteContent
 {
     public const string Name = "Moritz Waldau";
     public const string JobTitle = "IT-Consultant";
-    public const string Tagline = "Systemarchitektur und Full-Stack-Entwicklung mit .NET, Java und der Cloud.";
+    public const string Tagline = "Systemarchitektur und Full-Stack-Entwicklung mit .NET und der Azure Cloud.";
 
     /// <summary>Rotierende Begriffe für die Typewriter-Animation im Hero („Ich gestalte …").</summary>
     public static readonly string[] TypewriterWords =
     [
-        "Systemarchitektur",
-        ".NET- & Java-Lösungen",
+        ".NET Lösungen",
         "Cloud-Anwendungen",
         "Microservices",
     ];
 
     public const string AboutText =
-        "Ich bin IT-Consultant bei Cluster Reply in München mit Schwerpunkt auf Systemarchitektur " +
-        "und Full-Stack-Entwicklung. Nach meinem dualen Studium der Wirtschaftsinformatik (B.Sc.) " +
-        "habe ich bei Swiss Life Anwendungen mitbetreut, die von über 13.000 Beratern genutzt werden — " +
-        "heute verantworte ich Architektur-Entscheidungen an der Schnittstelle zwischen Legacy-.NET " +
-        "und modernen .NET-9/MAUI-Stacks. Kunden schätzen mich als technischen Ansprechpartner, der " +
+        "Ich bin IT-Consultant bei Cluster Reply in München mit Schwerpunkt auf der .NET Entwicklung. " +
+        "Nach meinem dualen Studium der Wirtschaftsinformatik (B.Sc.) " +
+        "habe ich bei Swiss Life Deutschland Anwendungen mitbetreut, die von über 13.000 Beratern täglich genutzt werden — " +
+        "heute verantworte ich die kontnuriliche Pflege und weiterentwicklung einer .NET 4.8 Legacy Applikation. " +
+        "Zudem treffe ich Architekturentscheidungen und unterstütze den Kunden in der priorisierung von Epic's " +
+        "im migrations Projekt einer Enterprise Legancy Anwendung hin zu einer modernen " +
+        ".NET 9 Maui Applikation. Kunden schätzen mich als technischen Ansprechpartner, der " +
         "komplexe Anforderungen schnell in tragfähige Lösungen übersetzt. Abseits des Codes findet " +
         "man mich in den Bergen — im Sommer beim Wandern, im Winter auf Skiern — oder beim Sport.";
 
@@ -33,14 +34,14 @@ public static class SiteContent
 
     public const string Email = "moritzwaldau99@gmail.com";
     public const string Phone = "+49 177 8905399";
-    public const string GitHubUrl = "[PLATZHALTER: GitHub-URL]";
-    public const string LinkedInUrl = "[PLATZHALTER: LinkedIn-URL]";
+    public const string GitHubUrl = "https://github.com/MoritzWaldau";
+    public const string LinkedInUrl = "https://www.linkedin.com/in/moritz-waldau-0a5778238/";
 
     public static readonly IReadOnlyList<Stat> Stats =
     [
-        new(5, "+", "Jahre IT-Erfahrung"),
-        new(13000, "+", "Nutzer der betreuten Anwendungen"),
-        new(10, "+", "Technologien im Stack"),
+        new(5, "+", "Jahre Agile Softwareentwicklung"),
+        new(100, "K +", "Nutzer Anwendung betreut"),
+        new(5, "+", "Technologien im Stack"),
         new(2, "", "Cloud-Plattformen (AWS & Azure)"),
     ];
 
@@ -48,7 +49,7 @@ public static class SiteContent
     [
         new("Backend & Sprachen", ["C#", ".NET 4.8 – 9", ".NET MAUI", "Java 17", "Java EE", "SQL", "REST APIs"]),
         new("Frontend & Web", ["Blazor", "VueJs", "JSF", "HTML/CSS"]),
-        new("Cloud & Methoden", ["AWS (Textract, S3)", "Azure", "Microservice-Architektur", "Scrum", "Git"]),
+        new("Cloud & Methoden", ["AWS", "Azure", "Microservice-Architektur", "Scrum", "Git"]),
         new("Sprachen", ["Deutsch (Muttersprache)", "Englisch (gute Kenntnisse)"]),
     ];
 
@@ -57,7 +58,7 @@ public static class SiteContent
         new("Legacy-Modernisierung im Automotive-Umfeld",
             "Verantwortung für die Systemarchitektur bei der Ablösung einer Legacy-.NET-4.8-Anwendung " +
             "durch eine neue .NET-9-MAUI-Lösung: Definition von Service-Grenzen, Datenflussmustern und " +
-            "Integrationspunkten. Als technischer Ansprechpartner der OEM-Kundenseite stimme ich " +
+            "Integrationspunkten. Als technischer Mitansprechpartner der OEM-Kundenseite stimme ich " +
             "Epic-Scopes, Feature-Prioritäten und Akzeptanzkriterien ab.",
             ["C#", ".NET 9", ".NET MAUI", "Systemarchitektur"],
             Link: null),
@@ -82,8 +83,8 @@ public static class SiteContent
         new("04/2025 – heute",
             "IT-Consultant",
             "Cluster Reply, München",
-            "Verantwortung für Systemarchitektur (Legacy .NET 4.8 → .NET 9 MAUI), technischer " +
-            "Ansprechpartner der OEM-Kundenseite, zentrale Anlaufstelle für Architektur- und " +
+            "Mitverantwortung für Systemarchitektur (Legacy .NET 4.8 → .NET 9 MAUI)," +
+            "Ansprechpartner der OEM-Kundenseite, Unterstützung als Anlaufstelle für Architektur- und " +
             "Implementierungsfragen."),
         new("09/2024 – 03/2025",
             "Full Stack Software Engineer (Java)",
