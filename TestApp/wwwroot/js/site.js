@@ -227,6 +227,39 @@
         });
     }
 
+    // ---------- Spotlight-Karten (Radial-Glow folgt dem Zeiger) ----------
+    function attachSpotlight(card) {
+        if (card.dataset.spotBound || !finePointer) return;
+        card.dataset.spotBound = 'true';
+        card.addEventListener('pointermove', e => {
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty('--spot-x', ((e.clientX - rect.left) / rect.width * 100).toFixed(1) + '%');
+            card.style.setProperty('--spot-y', ((e.clientY - rect.top) / rect.height * 100).toFixed(1) + '%');
+        });
+    }
+
+    // ---------- Copy-to-Clipboard (z.B. E-Mail-Button im Kontaktbereich) ----------
+    document.addEventListener('click', e => {
+        const btn = e.target.closest('[data-copy]');
+        if (!btn || !navigator.clipboard) return;
+        e.preventDefault();
+        navigator.clipboard.writeText(btn.dataset.copy).then(() => {
+            btn.classList.add('copied');
+            clearTimeout(btn._copyTimeout);
+            btn._copyTimeout = setTimeout(() => btn.classList.remove('copied'), 1600);
+        });
+    });
+
+    // ---------- Back-to-top ----------
+    function initBackToTop() {
+        const btn = document.querySelector('[data-back-to-top]');
+        if (!btn || btn.dataset.bound) return;
+        btn.dataset.bound = 'true';
+        btn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
+        });
+    }
+
     // ---------- Material-Ripple auf Buttons ----------
     document.addEventListener('click', e => {
         if (reducedMotion) return;
@@ -283,6 +316,9 @@
 
         const nav = document.querySelector('.site-navbar');
         if (nav) nav.classList.toggle('scrolled', y > 24);
+
+        const backToTop = document.querySelector('[data-back-to-top]');
+        if (backToTop) backToTop.classList.toggle('visible', y > 600);
 
         if (progressBar) {
             const max = document.documentElement.scrollHeight - window.innerHeight;
@@ -351,6 +387,7 @@
         if (!root.querySelectorAll) return;
         registerReveals(root);
         root.querySelectorAll('.tilt').forEach(attachTilt);
+        root.querySelectorAll('.spot-card').forEach(attachSpotlight);
         root.querySelectorAll('[data-typewriter]').forEach(initTypewriter);
         root.querySelectorAll('.split-letters').forEach(splitLetters);
         root.querySelectorAll('[data-count-to]').forEach(el => {
@@ -358,6 +395,7 @@
             else counterObserver.observe(el);
         });
         root.querySelectorAll('canvas.hero-canvas').forEach(initParticles);
+        initBackToTop();
         updateScrollFx();
     }
 
@@ -374,5 +412,5 @@
     scan(document);
 
     // Test-/Debug-Zugriff (z.B. für Verifikation in der Preview)
-    window.__siteFx = { scan, updateScrollFx, drawParticles, particles, animateCounter };
+    window.__siteFx = { scan, updateScrollFx, drawParticles, particles, animateCounter, attachSpotlight };
 })();

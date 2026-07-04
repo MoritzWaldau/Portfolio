@@ -1,8 +1,9 @@
 .site-navbar {
-    background-color: rgba(14, 42, 71, 0.72);
+    position: fixed;
+    background-color: rgba(7, 13, 25, 0.6);
     -webkit-backdrop-filter: blur(14px) saturate(160%);
     backdrop-filter: blur(14px) saturate(160%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid var(--color-border);
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
     transition: background-color 0.3s var(--ease-material),
@@ -10,16 +11,41 @@
                 padding 0.3s var(--ease-material);
 }
 
+.site-navbar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--gradient-accent);
+    opacity: 0.6;
+}
+
 /* verdichtet sich beim Scrollen (Klasse setzt js/site.js) */
 .site-navbar.scrolled {
-    background-color: rgba(14, 42, 71, 0.9);
-    box-shadow: 0 4px 24px rgba(14, 42, 71, 0.35);
+    background-color: rgba(7, 13, 25, 0.88);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
     padding-top: 0.3rem;
     padding-bottom: 0.3rem;
 }
 
 .navbar-brand {
     letter-spacing: 0.02em;
+}
+
+.brand-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    border-radius: 0.6rem;
+    background: var(--gradient-accent);
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.85rem;
+    letter-spacing: 0;
 }
 
 ::deep .nav-link {
@@ -62,4 +88,28 @@
 ::deep .nav-cta {
     color: var(--color-accent-light);
     font-weight: 600;
+    border: 1px solid rgba(47, 129, 247, 0.35);
+    border-radius: 999px;
+    padding: 0.35em 1em !important;
+    margin-left: 0.5rem;
+    transition: background-color 0.25s var(--ease-material), box-shadow 0.25s var(--ease-material);
+}
+
+::deep .nav-cta:hover {
+    background-color: rgba(47, 129, 247, 0.14);
+    box-shadow: var(--glow-sm);
+}
+
+::deep .nav-cta::after {
+    display: none;
+}
+
+@media (max-width: 767.98px) {
+    .navbar-collapse {
+        background-color: rgba(7, 13, 25, 0.96);
+        border-radius: 0.75rem;
+        margin-top: 0.75rem;
+        padding: 0.5rem 1rem;
+        border: 1px solid var(--color-border);
+    }
 }

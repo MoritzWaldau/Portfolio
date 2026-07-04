@@ -1,24 +1,30 @@
 <section id="kontakt" class="section section-contact text-center">
-    <div class="container reveal">
-        <h2 class="section-title">Kontakt</h2>
-        <p class="lead mb-4">
-            Sie haben ein Projekt oder eine Frage? Ich freue mich auf Ihre Nachricht.
-        </p>
-        <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center gap-3">
-            <span class="glow-border">
-                <a class="btn btn-accent btn-lg" href="mailto:@SiteContent.Email">@SiteContent.Email</a>
-            </span>
-            <a class="btn btn-outline-primary btn-lg" href="@PhoneHref">@SiteContent.Phone</a>
-        </div>
-        <div class="d-flex justify-content-center gap-4 mt-4">
-            @if (SiteContent.IsProvided(SiteContent.GitHubUrl))
-            {
-                <a href="@SiteContent.GitHubUrl" target="_blank" rel="noopener">GitHub</a>
-            }
-            @if (SiteContent.IsProvided(SiteContent.LinkedInUrl))
-            {
-                <a href="@SiteContent.LinkedInUrl" target="_blank" rel="noopener">LinkedIn</a>
-            }
+    <div class="container">
+        <div class="contact-panel glass-panel reveal">
+            <p class="section-kicker">@SiteContent.SectionCopy.ContactKicker</p>
+            <h2 class="section-title">@SiteContent.SectionCopy.ContactTitle</h2>
+            <p class="lead mb-4">@SiteContent.SectionCopy.ContactIntro</p>
+            <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center gap-3">
+                <span class="glow-border">
+                    <a class="btn btn-accent btn-lg contact-copy-btn" href="mailto:@SiteContent.Email"
+                       data-copy="@SiteContent.Email">@SiteContent.Email</a>
+                </span>
+                <a class="btn btn-outline-primary btn-lg" href="@PhoneHref">@SiteContent.Phone</a>
+            </div>
+            <div class="d-flex justify-content-center gap-3 mt-4">
+                @if (SiteContent.IsProvided(SiteContent.GitHubUrl))
+                {
+                    <a class="icon-btn" href="@SiteContent.GitHubUrl" target="_blank" rel="noopener" aria-label="GitHub">
+                        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+                    </a>
+                }
+                @if (SiteContent.IsProvided(SiteContent.LinkedInUrl))
+                {
+                    <a class="icon-btn" href="@SiteContent.LinkedInUrl" target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M0 1.15C0 .52.53 0 1.19 0h13.62C15.47 0 16 .52 16 1.15v13.7c0 .63-.53 1.15-1.19 1.15H1.19C.53 16 0 15.48 0 14.85V1.15Zm4.94 12.32V6.16H2.42v7.31h2.52ZM3.68 5.13c.88 0 1.43-.58 1.43-1.31-.02-.74-.55-1.31-1.41-1.31-.86 0-1.43.57-1.43 1.31 0 .73.55 1.31 1.39 1.31h.02Zm4.59 8.34v-4.08c0-.22.02-.44.08-.6.18-.44.58-.9 1.26-.9.89 0 1.24.68 1.24 1.68v3.9h2.52V9.24c0-2.33-1.24-3.41-2.9-3.41-1.34 0-1.93.74-2.26 1.26h.02v-1.08H6.72c.03.71 0 7.31 0 7.31h2.55Z"/></svg>
+                    </a>
+                }
+            </div>
         </div>
     </div>
 </section>

@@ -1,9 +1,37 @@
 <section id="ueber-mich" class="section">
-    <div class="container reveal">
-        <h2 class="section-title">Über mich</h2>
-        <div class="row">
-            <div class="col-lg-8">
-                <p class="lead">@SiteContent.AboutText</p>
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-7">
+                <p class="section-kicker reveal">@SiteContent.SectionCopy.AboutKicker</p>
+                <h2 class="section-title reveal">@SiteContent.SectionCopy.AboutTitle</h2>
+                <p class="lead reveal">@SiteContent.AboutText</p>
+                <p class="reveal">@SiteContent.AboutTextSecondary</p>
+                <div class="d-flex flex-wrap gap-2 mt-4">
+                    @foreach (var (highlight, index) in SiteContent.AboutHighlights.Select((h, i) => (h, i)))
+                    {
+                        <span class="badge skill-badge reveal" style="--reveal-delay: @index">@highlight</span>
+                    }
+                </div>
+            </div>
+            <div class="col-lg-5 reveal reveal-right">
+                <div class="code-window">
+                    <div class="code-window-bar">
+                        <span class="code-window-dot"></span>
+                        <span class="code-window-dot"></span>
+                        <span class="code-window-dot"></span>
+                        <span class="code-window-tab">moritz.cs</span>
+                    </div>
+                    <pre><code><span class="tok-kw">var</span> consultant = <span class="tok-kw">new</span> <span class="tok-type">Engineer</span>
+{
+    <span class="tok-prop">Name</span> = <span class="tok-str">"Moritz Waldau"</span>,
+    <span class="tok-prop">Role</span> = <span class="tok-str">"IT-Consultant"</span>,
+    <span class="tok-prop">Location</span> = <span class="tok-str">"München"</span>,
+    <span class="tok-prop">Focus</span> = [<span class="tok-str">".NET"</span>, <span class="tok-str">"Azure"</span>],
+    <span class="tok-prop">UsersServed</span> = <span class="tok-str">13_000</span>,
+    <span class="tok-com">// Berge im Sommer, Skier im Winter</span>
+    <span class="tok-prop">OffDuty</span> = <span class="tok-str">"Bergen"</span>,
+};</code></pre>
+                </div>
             </div>
         </div>
     </div>

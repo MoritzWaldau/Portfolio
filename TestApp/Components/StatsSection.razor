@@ -5,6 +5,7 @@
             {
                 <div class="col-6 col-md-3 reveal" style="--reveal-delay: @index">
                     <div class="stat-card">
+                        <div class="stat-icon" aria-hidden="true">@StatIcon(stat.Icon)</div>
                         <div class="stat-value" data-count-to="@stat.Value" data-suffix="@stat.Suffix">0@(stat.Suffix)</div>
                         <div class="stat-label">@stat.Label</div>
                     </div>
@@ -13,3 +14,14 @@
         </div>
     </div>
 </section>
+
+@code {
+    private static MarkupString StatIcon(string icon) => new(icon switch
+    {
+        "calendar" => "<svg viewBox=\"0 0 24 24\"><rect x=\"3\" y=\"5\" width=\"18\" height=\"16\" rx=\"2\"/><path d=\"M3 10h18M8 3v4M16 3v4\"/></svg>",
+        "users" => "<svg viewBox=\"0 0 24 24\"><circle cx=\"9\" cy=\"8\" r=\"3.2\"/><path d=\"M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6\"/><circle cx=\"17.5\" cy=\"9\" r=\"2.6\"/><path d=\"M15.2 14.3c2.6.4 4.3 2.4 4.3 5.7\"/></svg>",
+        "layers" => "<svg viewBox=\"0 0 24 24\"><path d=\"M12 3 2.5 8 12 13l9.5-5L12 3Z\"/><path d=\"M2.5 13 12 18l9.5-5\"/></svg>",
+        "cloud" => "<svg viewBox=\"0 0 24 24\"><path d=\"M7 18h10.5a3.5 3.5 0 0 0 0-7 5.5 5.5 0 0 0-10.7-1.8A4 4 0 0 0 7 18Z\"/></svg>",
+        _ => "",
+    });
+}

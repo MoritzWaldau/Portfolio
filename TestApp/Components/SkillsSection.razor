@@ -1,17 +1,19 @@
 <section id="skills" class="section section-alt">
     <div class="container">
-        <h2 class="section-title reveal">Skills</h2>
+        <p class="section-kicker reveal">@SiteContent.SectionCopy.SkillsKicker</p>
+        <h2 class="section-title reveal">@SiteContent.SectionCopy.SkillsTitle</h2>
         <div class="row g-4">
             @foreach (var (group, index) in SiteContent.SkillGroups.Select((g, i) => (g, i)))
             {
-                <div class="col-md-4 reveal" style="--reveal-delay: @index">
-                    <div class="card h-100">
+                <div class="col-md-6 reveal" style="--reveal-delay: @index">
+                    <div class="card spot-card h-100">
                         <div class="card-body">
+                            <div class="skill-icon" aria-hidden="true">@GroupIcon(group.Icon)</div>
                             <h3 class="card-title h5">@group.Title</h3>
                             <div class="d-flex flex-wrap gap-2 mt-3">
-                                @foreach (var skill in group.Skills)
+                                @foreach (var (skill, skillIndex) in group.Skills.Select((s, i) => (s, i)))
                                 {
-                                    <span class="badge skill-badge">@skill</span>
+                                    <span class="badge skill-badge reveal" style="--reveal-delay: @(skillIndex)">@skill</span>
                                 }
                             </div>
                         </div>
@@ -21,3 +23,14 @@
         </div>
     </div>
 </section>
+
+@code {
+    private static MarkupString GroupIcon(string icon) => new(icon switch
+    {
+        "backend" => "<svg viewBox=\"0 0 24 24\"><path d=\"m8 9-4 3 4 3M16 9l4 3-4 3M13.5 6.5l-3 11\"/></svg>",
+        "frontend" => "<svg viewBox=\"0 0 24 24\"><rect x=\"3\" y=\"4\" width=\"18\" height=\"13\" rx=\"1.5\"/><path d=\"M8 21h8M12 17v4\"/></svg>",
+        "cloud" => "<svg viewBox=\"0 0 24 24\"><path d=\"M7 18h10.5a3.5 3.5 0 0 0 0-7 5.5 5.5 0 0 0-10.7-1.8A4 4 0 0 0 7 18Z\"/></svg>",
+        "languages" => "<svg viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z\"/></svg>",
+        _ => "",
+    });
+}
