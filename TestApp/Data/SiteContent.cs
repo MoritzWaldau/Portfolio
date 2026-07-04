@@ -68,7 +68,7 @@ public sealed record Content(
     public static readonly Content German = new(
         JobTitle: "IT-Consultant",
         Tagline: "Systemarchitektur und Full-Stack-Entwicklung mit .NET und der Azure Cloud.",
-        TypewriterWords: [".NET Lösungen", "Cloud-Anwendungen", "Microservices"],
+        TypewriterWords: [".NET Lösungen", "Cloud-Anwendungen", "Microservices", "AI Agents"],
         AboutText:
             "Ich bin IT-Consultant bei Cluster Reply in München — mit einem klaren Schwerpunkt: .NET und die Azure Cloud. " +
             "Nach meinem dualen Studium der Wirtschaftsinformatik (B.Sc.) habe ich bei Swiss Life Deutschland Anwendungen " +
@@ -77,12 +77,16 @@ public sealed record Content(
             "Architekturentscheidungen und unterstütze den Kunden bei der Priorisierung der Epics im Migrationsprojekt " +
             "hin zu einer modernen .NET-9-MAUI-Anwendung.",
         AboutTextSecondary:
-            "Kunden schätzen mich als technischen Ansprechpartner, der komplexe Anforderungen schnell in tragfähige " +
-            "Lösungen übersetzt. Abseits des Codes findet man mich in den Bergen — im Sommer beim Wandern, im Winter auf Skiern.",
+            "KI-gestützte Entwicklung ist dabei fester Teil meines Alltags: Ich arbeite täglich mit Claude Code und " +
+            "GitHub Copilot, baue AI Agents und eigene MCP-Server und verfolge die Entwicklungen im Agentic-Umfeld " +
+            "aus erster Hand. Kunden schätzen mich als technischen Ansprechpartner, der komplexe Anforderungen schnell " +
+            "in tragfähige Lösungen übersetzt. Abseits des Codes findet man mich in den Bergen — im Sommer beim " +
+            "Wandern, im Winter auf Skiern.",
         AboutHighlights:
         [
             "Architektur & Migration",
             "Azure & AWS",
+            "AI Agents & MCP",
             "13.000+ Nutzer betreut",
             "Mentoring & Wissenstransfer",
         ],
@@ -97,6 +101,7 @@ public sealed record Content(
         [
             new("Backend & Sprachen", ["C#", ".NET 4.8 – 10", ".NET MAUI", "Java 17", "Java EE", "SQL", "REST APIs"], "backend"),
             new("Frontend & Web", ["Blazor", "VueJs", "JSF", "HTML/CSS"], "frontend"),
+            new("KI & Agentic Development", ["MCP (Model Context Protocol)", "AI Agents", "Claude Code", "GitHub Copilot", "Azure OpenAI"], "ai"),
             new("Cloud & Methoden", ["AWS", "Azure", "Microservice-Architektur", "Scrum", "Git"], "cloud"),
             new("Sprachen", ["Deutsch (Muttersprache)", "Englisch (gute Kenntnisse)"], "languages"),
         ],
@@ -242,7 +247,7 @@ public sealed record Content(
     public static readonly Content English = new(
         JobTitle: "IT Consultant",
         Tagline: "System architecture and full-stack development with .NET and the Azure Cloud.",
-        TypewriterWords: [".NET Solutions", "Cloud Applications", "Microservices"],
+        TypewriterWords: [".NET Solutions", "Cloud Applications", "Microservices", "AI Agents"],
         AboutText:
             "I'm an IT Consultant at Cluster Reply in Munich — with a clear focus: .NET and the Azure Cloud. " +
             "After completing my dual studies in Business Informatics (B.Sc.), I helped maintain applications at " +
@@ -251,12 +256,15 @@ public sealed record Content(
             "decisions, and support the client in prioritizing epics for the migration project toward a modern " +
             ".NET 9 MAUI application.",
         AboutTextSecondary:
+            "AI-assisted development is a core part of my daily work: I code with Claude Code and GitHub Copilot " +
+            "every day, build AI agents and custom MCP servers, and follow the agentic ecosystem first-hand. " +
             "Clients value me as a technical point of contact who translates complex requirements into robust " +
             "solutions quickly. Away from the keyboard you'll find me in the mountains — hiking in summer, skiing in winter.",
         AboutHighlights:
         [
             "Architecture & Migration",
             "Azure & AWS",
+            "AI Agents & MCP",
             "13,000+ Users Supported",
             "Mentoring & Knowledge Transfer",
         ],
@@ -271,6 +279,7 @@ public sealed record Content(
         [
             new("Backend & Languages", ["C#", ".NET 4.8 – 10", ".NET MAUI", "Java 17", "Java EE", "SQL", "REST APIs"], "backend"),
             new("Frontend & Web", ["Blazor", "VueJs", "JSF", "HTML/CSS"], "frontend"),
+            new("AI & Agentic Development", ["MCP (Model Context Protocol)", "AI Agents", "Claude Code", "GitHub Copilot", "Azure OpenAI"], "ai"),
             new("Cloud & Methods", ["AWS", "Azure", "Microservice Architecture", "Scrum", "Git"], "cloud"),
             new("Languages", ["German (Native)", "English (Proficient)"], "languages"),
         ],
