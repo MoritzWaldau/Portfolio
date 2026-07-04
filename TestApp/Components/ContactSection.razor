@@ -1,9 +1,11 @@
+@implements IDisposable
+
 <section id="kontakt" class="section section-contact text-center">
     <div class="container">
         <div class="contact-panel glass-panel reveal">
-            <p class="section-kicker">@SiteContent.SectionCopy.ContactKicker</p>
-            <h2 class="section-title">@SiteContent.SectionCopy.ContactTitle</h2>
-            <p class="lead mb-4">@SiteContent.SectionCopy.ContactIntro</p>
+            <p class="section-kicker">@SiteContent.Current.SectionCopy.ContactKicker</p>
+            <h2 class="section-title">@SiteContent.Current.SectionCopy.ContactTitle</h2>
+            <p class="lead mb-4">@SiteContent.Current.SectionCopy.ContactIntro</p>
             <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center gap-3">
                 <span class="glow-border">
                     <a class="btn btn-accent btn-lg contact-copy-btn" href="mailto:@SiteContent.Email"
@@ -11,6 +13,9 @@
                 </span>
                 <a class="btn btn-outline-primary btn-lg" href="@PhoneHref">@SiteContent.Phone</a>
             </div>
+            <button type="button" class="btn btn-link btn-sm mt-3 print-cv-link" onclick="window.print()">
+                @SiteContent.Current.Chrome.PrintCvLabel
+            </button>
             <div class="d-flex justify-content-center gap-3 mt-4">
                 @if (SiteContent.IsProvided(SiteContent.GitHubUrl))
                 {
@@ -30,5 +35,9 @@
 </section>
 
 @code {
+    protected override void OnInitialized() => SiteContent.LanguageChanged += StateHasChanged;
+
+    public void Dispose() => SiteContent.LanguageChanged -= StateHasChanged;
+
     private static string PhoneHref => "tel:" + SiteContent.Phone.Replace(" ", "");
 }

@@ -492,6 +492,36 @@ body::before {
     box-shadow: 0 0 0 0.1rem var(--color-bg), 0 0 0 0.25rem var(--color-accent);
 }
 
+/* Sichtbarer Fokus-Ring für Tastaturnutzung (Skip-Link, Nav-Links, Icon-Buttons, Karten-Links) */
+a:focus-visible,
+button:focus-visible,
+.icon-btn:focus-visible,
+.nav-link:focus-visible {
+    outline: 2px solid var(--color-accent-light);
+    outline-offset: 3px;
+    border-radius: 0.3rem;
+}
+
+/* Skip-Link: unsichtbar bis zum ersten Tab-Stopp */
+.skip-link {
+    position: fixed;
+    top: -3rem;
+    left: 1rem;
+    z-index: 2100;
+    background: var(--color-surface);
+    color: var(--color-heading);
+    padding: 0.6em 1.2em;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-border);
+    box-shadow: var(--elev-2);
+    transition: top 0.2s var(--ease-material);
+}
+
+.skip-link:focus {
+    top: 1rem;
+    color: var(--color-heading);
+}
+
 .btn-outline-light {
     color: #fff;
     border-color: rgba(255, 255, 255, 0.55);
@@ -1072,6 +1102,16 @@ body::before {
     margin-top: 2rem;
 }
 
+.print-cv-link {
+    color: var(--color-text-muted);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.print-cv-link:hover {
+    color: var(--color-accent-light);
+}
+
 /* ---------- Skill-Icon-Kachel ---------- */
 
 .skill-icon {
@@ -1365,3 +1405,106 @@ body::before {
     .loading-progress-text:after {
         content: var(--blazor-load-percentage-text, "Lädt …");
     }
+
+/* ---------- Druckansicht (Lebenslauf als PDF via Browser-Druckdialog) ---------- */
+
+@media print {
+    :root {
+        color-scheme: light;
+    }
+
+    html, body {
+        background: #fff;
+        color: #1a1a1a;
+    }
+
+    body::before,
+    .ambient,
+    .site-navbar,
+    .back-to-top,
+    .hero-canvas,
+    .project-graphic,
+    .code-window,
+    .skip-link,
+    #cursor-glow,
+    #scroll-progress,
+    .btn,
+    .glow-border,
+    .icon-btn,
+    .site-footer,
+    .contact-copy-btn::after {
+        display: none !important;
+    }
+
+    main {
+        padding-top: 0 !important;
+    }
+
+    .hero {
+        background: none;
+        color: #1a1a1a;
+        padding: 1rem 0;
+    }
+
+    .hero-tagline,
+    .hero-kicker {
+        color: #1a1a1a !important;
+    }
+
+    .hero-portrait-wrap::before,
+    .hero-portrait-wrap::after {
+        display: none;
+    }
+
+    .section,
+    .section-alt,
+    .section-contact,
+    .section-stats {
+        background: none !important;
+        border: none !important;
+        padding: 1rem 0;
+        break-inside: avoid;
+    }
+
+    .card,
+    .stat-card,
+    .timeline-content,
+    .glass-panel,
+    .contact-panel,
+    .featured-card {
+        background: none !important;
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        color: #1a1a1a !important;
+    }
+
+    .section-title,
+    .card-title,
+    .stat-value,
+    .timeline-org,
+    h1, h2, h3 {
+        color: #000 !important;
+        -webkit-text-fill-color: #000 !important;
+    }
+
+    .section-kicker,
+    .section-intro,
+    .stat-label,
+    .text-muted,
+    .lead,
+    p {
+        color: #333 !important;
+    }
+
+    .skill-badge, .tech-badge {
+        background: #f0f0f0 !important;
+        color: #1a1a1a !important;
+        border-color: #ccc !important;
+    }
+
+    a {
+        color: #1a1a1a !important;
+        text-decoration: underline;
+    }
+}

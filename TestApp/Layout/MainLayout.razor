@@ -5,6 +5,8 @@
 @inject IJSRuntime JS
 
 <div class="site">
+    <a class="skip-link" href="#main-content">@SiteContent.Current.Chrome.SkipLink</a>
+
     <div class="ambient" aria-hidden="true">
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
@@ -13,7 +15,7 @@
 
     <NavMenu />
 
-    <main>
+    <main id="main-content">
         @Body
     </main>
 
@@ -25,23 +27,23 @@
                         <span class="brand-mark" aria-hidden="true">MW</span>
                         <span class="fw-semibold footer-name">@SiteContent.Name</span>
                     </div>
-                    <p class="footer-tagline mb-0">@SiteContent.Tagline</p>
+                    <p class="footer-tagline mb-0">@SiteContent.Current.Tagline</p>
                 </div>
                 <div class="col-md-4">
-                    <h3 class="footer-heading">Sitemap</h3>
+                    <h3 class="footer-heading">@SiteContent.Current.Chrome.FooterSitemapHeading</h3>
                     <nav class="d-flex flex-column gap-2">
-                        <a href="/#ueber-mich">Über mich</a>
-                        <a href="/#skills">Skills</a>
-                        <a href="/#projekte">Projekte</a>
-                        <a href="/#werdegang">Werdegang</a>
-                        <a href="/#kontakt">Kontakt</a>
+                        <a href="/#ueber-mich">@SiteContent.Current.Chrome.NavAbout</a>
+                        <a href="/#skills">@SiteContent.Current.Chrome.NavSkills</a>
+                        <a href="/#projekte">@SiteContent.Current.Chrome.NavProjects</a>
+                        <a href="/#werdegang">@SiteContent.Current.Chrome.NavCareer</a>
+                        <a href="/#kontakt">@SiteContent.Current.Chrome.NavContact</a>
                     </nav>
                 </div>
                 <div class="col-md-4">
-                    <h3 class="footer-heading">Rechtliches &amp; Social</h3>
+                    <h3 class="footer-heading">@SiteContent.Current.Chrome.FooterLegalHeading</h3>
                     <nav class="d-flex flex-column gap-2 mb-3">
-                        <a href="impressum">Impressum</a>
-                        <a href="datenschutz">Datenschutz</a>
+                        <a href="impressum">@SiteContent.Current.Chrome.ImpressumLabel</a>
+                        <a href="datenschutz">@SiteContent.Current.Chrome.DatenschutzLabel</a>
                     </nav>
                     <div class="d-flex gap-2">
                         @if (SiteContent.IsProvided(SiteContent.GitHubUrl))
@@ -62,26 +64,43 @@
             <hr class="footer-divider" />
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 footer-bottom">
                 <span>© @DateTime.Now.Year @SiteContent.Name</span>
-                <span>Gebaut mit Blazor WebAssembly &amp; ☕ — gehostet auf GitHub Pages</span>
+                <span>@SiteContent.Current.Chrome.FooterBuiltWith</span>
             </div>
         </div>
     </footer>
 
-    <button type="button" class="icon-btn back-to-top" data-back-to-top aria-label="Nach oben scrollen">
+    <button type="button" class="icon-btn back-to-top" data-back-to-top aria-label="@SiteContent.Current.Chrome.BackToTopLabel">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
     </button>
 </div>
 
 @code {
     // Der Blazor-Router scrollt bei Anker-Links (z.B. /#projekte) nicht selbst zur Sektion.
-    protected override void OnInitialized() => Nav.LocationChanged += OnLocationChanged;
+    protected override void OnInitialized()
+    {
+        Nav.LocationChanged += OnLocationChanged;
+        SiteContent.LanguageChanged += StateHasChanged;
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
+            await InitLanguageAsync();
             await ScrollToFragmentAsync();
         }
+    }
+
+    private async Task InitLanguageAsync()
+    {
+        var stored = await JS.InvokeAsync<string?>("localStorage.getItem", "lang");
+        var english = stored switch
+        {
+            "en" => true,
+            "de" => false,
+            _ => (await JS.InvokeAsync<string>("getBrowserLanguage")).StartsWith("en", StringComparison.OrdinalIgnoreCase),
+        };
+        SiteContent.SetLanguage(english);
     }
 
     private async void OnLocationChanged(object? sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)
@@ -96,5 +115,9 @@
         }
     }
 
-    public void Dispose() => Nav.LocationChanged -= OnLocationChanged;
+    public void Dispose()
+    {
+        Nav.LocationChanged -= OnLocationChanged;
+        SiteContent.LanguageChanged -= StateHasChanged;
+    }
 }

@@ -6,9 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Moritz Waldau – IT-Consultant für Systemarchitektur und Full-Stack-Entwicklung mit .NET, Azure und Microservices. Open-Source-Projekte (OrderSphere, EmployeeManagementSystem), Skills und Werdegang." />
     <meta name="theme-color" content="#070d19" />
+    <link rel="canonical" href="https://moritzwaldau.github.io/Portfolio/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Moritz Waldau – Portfolio" />
+    <meta property="og:description" content="IT-Consultant für Systemarchitektur und Full-Stack-Entwicklung mit .NET, Azure und Microservices. Open-Source-Projekte, Skills und Werdegang." />
+    <meta property="og:url" content="https://moritzwaldau.github.io/Portfolio/" />
+    <meta property="og:image" content="https://moritzwaldau.github.io/Portfolio/icon-512.png" />
+    <meta property="og:locale" content="de_DE" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Moritz Waldau – Portfolio" />
+    <meta name="twitter:description" content="IT-Consultant für Systemarchitektur und Full-Stack-Entwicklung mit .NET, Azure und Microservices." />
+    <meta name="twitter:image" content="https://moritzwaldau.github.io/Portfolio/icon-512.png" />
+
     <title>Moritz Waldau – Portfolio</title>
     <base href="/" />
     <link rel="preload" id="webassembly" />
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Moritz Waldau",
+        "jobTitle": "IT-Consultant",
+        "url": "https://moritzwaldau.github.io/Portfolio/",
+        "sameAs": [
+            "https://github.com/MoritzWaldau",
+            "https://www.linkedin.com/in/moritz-waldau-0a5778238/"
+        ],
+        "knowsAbout": ["C#", ".NET", "Azure", "Microservice-Architektur", "Blazor", "Java", "AWS"]
+    }
+    </script>
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/app.css" />
     <link rel="icon" type="image/png" href="favicon.png" />
@@ -43,10 +72,19 @@
                 setTimeout(() => window.scrollToFragment(id, (attempt ?? 0) + 1), 100);
             }
         };
+        // Für die Sprach-Erkennung beim ersten Start (siehe MainLayout.razor).
+        window.getBrowserLanguage = function () {
+            return navigator.language || 'de';
+        };
     </script>
     <script src="js/site.js"></script>
     <script src="_framework/blazor.webassembly#[.{fingerprint}].js"></script>
     <script>navigator.serviceWorker.register('service-worker.js', { updateViaCache: 'none' });</script>
+
+    <!-- Cookielose Reichweitenmessung (GoatCounter). Erst aktiv, sobald ein echter
+         Site-Code (siehe https://www.goatcounter.com) den Platzhalter ersetzt. -->
+    <script data-goatcounter="https://[PLATZHALTER-GOATCOUNTER-CODE].goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
 </body>
 
 </html>

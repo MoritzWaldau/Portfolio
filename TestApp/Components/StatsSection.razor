@@ -1,7 +1,9 @@
+@implements IDisposable
+
 <section class="section-stats" aria-label="Kennzahlen">
     <div class="container">
         <div class="row g-3">
-            @foreach (var (stat, index) in SiteContent.Stats.Select((s, i) => (s, i)))
+            @foreach (var (stat, index) in SiteContent.Current.Stats.Select((s, i) => (s, i)))
             {
                 <div class="col-6 col-md-3 reveal" style="--reveal-delay: @index">
                     <div class="stat-card">
@@ -16,6 +18,10 @@
 </section>
 
 @code {
+    protected override void OnInitialized() => SiteContent.LanguageChanged += StateHasChanged;
+
+    public void Dispose() => SiteContent.LanguageChanged -= StateHasChanged;
+
     private static MarkupString StatIcon(string icon) => new(icon switch
     {
         "calendar" => "<svg viewBox=\"0 0 24 24\"><rect x=\"3\" y=\"5\" width=\"18\" height=\"16\" rx=\"2\"/><path d=\"M3 10h18M8 3v4M16 3v4\"/></svg>",

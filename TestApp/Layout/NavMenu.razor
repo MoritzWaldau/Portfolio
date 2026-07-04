@@ -1,4 +1,6 @@
 @using TestApp.Data
+@implements IDisposable
+@inject IJSRuntime JS
 
 <nav class="navbar navbar-expand-md navbar-dark site-navbar fixed-top">
     <div class="container">
@@ -11,11 +13,18 @@
         </button>
         <div class="@NavMenuCssClass navbar-collapse" @onclick="CollapseNavMenu">
             <ul class="navbar-nav ms-auto align-items-md-center">
-                <li class="nav-item"><a class="nav-link" href="/#ueber-mich">Über mich</a></li>
-                <li class="nav-item"><a class="nav-link" href="/#skills">Skills</a></li>
-                <li class="nav-item"><a class="nav-link" href="/#projekte">Projekte</a></li>
-                <li class="nav-item"><a class="nav-link" href="/#werdegang">Werdegang</a></li>
-                <li class="nav-item"><a class="nav-link nav-cta" href="/#kontakt">Kontakt</a></li>
+                <li class="nav-item"><a class="nav-link" href="/#ueber-mich">@SiteContent.Current.Chrome.NavAbout</a></li>
+                <li class="nav-item"><a class="nav-link" href="/#skills">@SiteContent.Current.Chrome.NavSkills</a></li>
+                <li class="nav-item"><a class="nav-link" href="/#projekte">@SiteContent.Current.Chrome.NavProjects</a></li>
+                <li class="nav-item"><a class="nav-link" href="/#werdegang">@SiteContent.Current.Chrome.NavCareer</a></li>
+                <li class="nav-item"><a class="nav-link nav-cta" href="/#kontakt">@SiteContent.Current.Chrome.NavContact</a></li>
+                <li class="nav-item">
+                    <button type="button" class="lang-switch" @onclick="ToggleLanguage" @onclick:stopPropagation="true"
+                            aria-label="Sprache wechseln / Switch language">
+                        <span class="@(SiteContent.IsEnglish ? "" : "is-active")">DE</span>
+                        <span class="@(SiteContent.IsEnglish ? "is-active" : "")">EN</span>
+                    </button>
+                </li>
             </ul>
         </div>
     </div>
@@ -29,4 +38,14 @@
     private void ToggleNavMenu() => collapseNavMenu = !collapseNavMenu;
 
     private void CollapseNavMenu() => collapseNavMenu = true;
+
+    protected override void OnInitialized() => SiteContent.LanguageChanged += StateHasChanged;
+
+    public void Dispose() => SiteContent.LanguageChanged -= StateHasChanged;
+
+    private async Task ToggleLanguage()
+    {
+        SiteContent.SetLanguage(!SiteContent.IsEnglish);
+        await JS.InvokeVoidAsync("localStorage.setItem", "lang", SiteContent.IsEnglish ? "en" : "de");
+    }
 }

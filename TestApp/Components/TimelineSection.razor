@@ -1,9 +1,11 @@
+@implements IDisposable
+
 <section id="werdegang" class="section section-alt">
     <div class="container">
-        <p class="section-kicker reveal">@SiteContent.SectionCopy.TimelineKicker</p>
-        <h2 class="section-title reveal">@SiteContent.SectionCopy.TimelineTitle</h2>
+        <p class="section-kicker reveal">@SiteContent.Current.SectionCopy.TimelineKicker</p>
+        <h2 class="section-title reveal">@SiteContent.Current.SectionCopy.TimelineTitle</h2>
         <div class="timeline reveal">
-            @foreach (var (entry, index) in SiteContent.Career.Select((e, i) => (e, i)))
+            @foreach (var (entry, index) in SiteContent.Current.Career.Select((e, i) => (e, i)))
             {
                 <div class="timeline-entry reveal reveal-left" style="--reveal-delay: @(index + 1)">
                     <div class="timeline-marker"></div>
@@ -12,7 +14,7 @@
                             @entry.Period
                             @if (index == 0)
                             {
-                                <span class="timeline-current-badge"><span class="dot"></span>Aktuell</span>
+                                <span class="timeline-current-badge"><span class="dot"></span>@SiteContent.Current.Chrome.CurrentBadge</span>
                             }
                         </span>
                         <h3 class="h5 mb-1">@entry.Role</h3>
@@ -24,3 +26,9 @@
         </div>
     </div>
 </section>
+
+@code {
+    protected override void OnInitialized() => SiteContent.LanguageChanged += StateHasChanged;
+
+    public void Dispose() => SiteContent.LanguageChanged -= StateHasChanged;
+}

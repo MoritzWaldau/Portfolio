@@ -1,9 +1,11 @@
+@implements IDisposable
+
 <section id="skills" class="section section-alt">
     <div class="container">
-        <p class="section-kicker reveal">@SiteContent.SectionCopy.SkillsKicker</p>
-        <h2 class="section-title reveal">@SiteContent.SectionCopy.SkillsTitle</h2>
+        <p class="section-kicker reveal">@SiteContent.Current.SectionCopy.SkillsKicker</p>
+        <h2 class="section-title reveal">@SiteContent.Current.SectionCopy.SkillsTitle</h2>
         <div class="row g-4">
-            @foreach (var (group, index) in SiteContent.SkillGroups.Select((g, i) => (g, i)))
+            @foreach (var (group, index) in SiteContent.Current.SkillGroups.Select((g, i) => (g, i)))
             {
                 <div class="col-md-6 reveal" style="--reveal-delay: @index">
                     <div class="card spot-card h-100">
@@ -25,6 +27,10 @@
 </section>
 
 @code {
+    protected override void OnInitialized() => SiteContent.LanguageChanged += StateHasChanged;
+
+    public void Dispose() => SiteContent.LanguageChanged -= StateHasChanged;
+
     private static MarkupString GroupIcon(string icon) => new(icon switch
     {
         "backend" => "<svg viewBox=\"0 0 24 24\"><path d=\"m8 9-4 3 4 3M16 9l4 3-4 3M13.5 6.5l-3 11\"/></svg>",
