@@ -76,6 +76,10 @@
         window.getBrowserLanguage = function () {
             return navigator.language || 'de';
         };
+        // Fokussiert ein Element per Blazor-JS-Interop (z.B. das Suchfeld der Command-Palette).
+        window.focusElement = function (el) {
+            el?.focus();
+        };
     </script>
     <script src="js/site.js"></script>
     <script src="_framework/blazor.webassembly#[.{fingerprint}].js"></script>

@@ -14,7 +14,6 @@ public static class SiteContent
     public const string PortraitPath = "img/portrait.jpg";
 
     public const string Email = "moritzwaldau99@gmail.com";
-    public const string Phone = "+49 177 8905399";
     public const string GitHubUrl = "https://github.com/MoritzWaldau";
     public const string LinkedInUrl = "https://www.linkedin.com/in/moritz-waldau-0a5778238/";
 
@@ -47,7 +46,6 @@ public static class SiteContent
         public const string FullName = Name;
         public const string Street = "Schwarmstedter Str. 2";
         public const string City = "29690 Essel";
-        public const string Phone = SiteContent.Phone;
     }
 }
 
@@ -97,7 +95,7 @@ public sealed record Content(
         ],
         SkillGroups:
         [
-            new("Backend & Sprachen", ["C#", ".NET 4.8 – 9", ".NET MAUI", "Java 17", "Java EE", "SQL", "REST APIs"], "backend"),
+            new("Backend & Sprachen", ["C#", ".NET 4.8 – 10", ".NET MAUI", "Java 17", "Java EE", "SQL", "REST APIs"], "backend"),
             new("Frontend & Web", ["Blazor", "VueJs", "JSF", "HTML/CSS"], "frontend"),
             new("Cloud & Methoden", ["AWS", "Azure", "Microservice-Architektur", "Scrum", "Git"], "cloud"),
             new("Sprachen", ["Deutsch (Muttersprache)", "Englisch (gute Kenntnisse)"], "languages"),
@@ -121,7 +119,8 @@ public sealed record Content(
                 ],
                 [".NET 10", "Blazor WASM", "MudBlazor", "PostgreSQL", "Azure Service Bus", "Redis", "YARP", "Auth0", ".NET Aspire", "OpenTelemetry", "Azure OpenAI"],
                 "https://github.com/MoritzWaldau/OrderSphere",
-                "orderSphere"),
+                "orderSphere",
+                "ordersphere"),
             new("EmployeeManagementSystem",
                 "Open Source · Cloud-Native",
                 "Entstanden als Code-Challenge bei Cluster Reply — und ausgebaut zu einer vollwertigen, cloud-nativen " +
@@ -136,7 +135,8 @@ public sealed record Content(
                 ],
                 [".NET 9", ".NET Aspire", "Docker", "GitHub Actions", "Azure Container Apps"],
                 "https://github.com/MoritzWaldau/EmployeeManagementSystem",
-                "employeeManagement"),
+                "employeeManagement",
+                "employeemanagementsystem"),
         ],
         Projects:
         [
@@ -202,7 +202,7 @@ public sealed record Content(
             TimelineTitle: "Mein Weg bis hierher",
             ContactKicker: "Kontakt",
             ContactTitle: "Lassen Sie uns sprechen",
-            ContactIntro: "Sie haben ein Projekt, eine Frage oder Lust auf einen technischen Austausch? Schreiben Sie mir — ich antworte in der Regel innerhalb von 24 Stunden."),
+            ContactIntro: "Sie haben ein Projekt, eine Frage oder Lust auf einen technischen Austausch? Schreiben Sie mir eine E-Mail — ich melde mich in der Regel innerhalb von 24 Stunden zurück."),
         Chrome: new(
             NavAbout: "Über mich",
             NavSkills: "Skills",
@@ -211,7 +211,6 @@ public sealed record Content(
             NavContact: "Kontakt",
             SkipLink: "Zum Inhalt springen",
             BackToTopLabel: "Nach oben scrollen",
-            PrintCvLabel: "Lebenslauf als PDF speichern",
             FooterSitemapHeading: "Sitemap",
             FooterLegalHeading: "Rechtliches & Social",
             ImpressumLabel: "Impressum",
@@ -226,7 +225,19 @@ public sealed record Content(
             HeroCtaProjects: "Projekte ansehen",
             ViewOnGitHub: "Auf GitHub ansehen",
             ViewProject: "Zum Projekt",
-            CurrentBadge: "Aktuell"));
+            CurrentBadge: "Aktuell",
+            GitHubUpdatedToday: "heute aktualisiert",
+            GitHubUpdatedDaysAgo: "vor {0} Tagen aktualisiert",
+            ProjectDetailBack: "← Zurück zu den Projekten",
+            ProjectDetailHighlights: "Highlights",
+            ProjectDetailTechStack: "Tech-Stack",
+            ProjectDetailMore: "Mehr erfahren",
+            CmdkPlaceholder: "Suchen oder Befehl eingeben…",
+            CmdkNoResults: "Keine Treffer",
+            CmdkSectionNav: "Navigation",
+            CmdkSectionProjects: "Projekte",
+            CmdkSectionActions: "Aktionen",
+            CmdkHint: "↑↓ navigieren · ↵ öffnen · Esc schließen"));
 
     public static readonly Content English = new(
         JobTitle: "IT Consultant",
@@ -258,7 +269,7 @@ public sealed record Content(
         ],
         SkillGroups:
         [
-            new("Backend & Languages", ["C#", ".NET 4.8 – 9", ".NET MAUI", "Java 17", "Java EE", "SQL", "REST APIs"], "backend"),
+            new("Backend & Languages", ["C#", ".NET 4.8 – 10", ".NET MAUI", "Java 17", "Java EE", "SQL", "REST APIs"], "backend"),
             new("Frontend & Web", ["Blazor", "VueJs", "JSF", "HTML/CSS"], "frontend"),
             new("Cloud & Methods", ["AWS", "Azure", "Microservice Architecture", "Scrum", "Git"], "cloud"),
             new("Languages", ["German (Native)", "English (Proficient)"], "languages"),
@@ -282,7 +293,8 @@ public sealed record Content(
                 ],
                 [".NET 10", "Blazor WASM", "MudBlazor", "PostgreSQL", "Azure Service Bus", "Redis", "YARP", "Auth0", ".NET Aspire", "OpenTelemetry", "Azure OpenAI"],
                 "https://github.com/MoritzWaldau/OrderSphere",
-                "orderSphere"),
+                "orderSphere",
+                "ordersphere"),
             new("EmployeeManagementSystem",
                 "Open Source · Cloud-Native",
                 "Started as a code challenge at Cluster Reply — and expanded into a full cloud-native application " +
@@ -296,7 +308,8 @@ public sealed record Content(
                 ],
                 [".NET 9", ".NET Aspire", "Docker", "GitHub Actions", "Azure Container Apps"],
                 "https://github.com/MoritzWaldau/EmployeeManagementSystem",
-                "employeeManagement"),
+                "employeeManagement",
+                "employeemanagementsystem"),
         ],
         Projects:
         [
@@ -359,7 +372,7 @@ public sealed record Content(
             TimelineTitle: "My Path So Far",
             ContactKicker: "Contact",
             ContactTitle: "Let's Talk",
-            ContactIntro: "Have a project, a question, or fancy a technical exchange? Drop me a line — I usually reply within 24 hours."),
+            ContactIntro: "Have a project, a question, or fancy a technical exchange? Send me an email — I usually get back to you within 24 hours."),
         Chrome: new(
             NavAbout: "About",
             NavSkills: "Skills",
@@ -368,7 +381,6 @@ public sealed record Content(
             NavContact: "Contact",
             SkipLink: "Skip to content",
             BackToTopLabel: "Scroll to top",
-            PrintCvLabel: "Save résumé as PDF",
             FooterSitemapHeading: "Sitemap",
             FooterLegalHeading: "Legal & Social",
             ImpressumLabel: "Imprint (German)",
@@ -383,7 +395,19 @@ public sealed record Content(
             HeroCtaProjects: "View Projects",
             ViewOnGitHub: "View on GitHub",
             ViewProject: "View Project",
-            CurrentBadge: "Current"));
+            CurrentBadge: "Current",
+            GitHubUpdatedToday: "updated today",
+            GitHubUpdatedDaysAgo: "updated {0} days ago",
+            ProjectDetailBack: "← Back to Projects",
+            ProjectDetailHighlights: "Highlights",
+            ProjectDetailTechStack: "Tech Stack",
+            ProjectDetailMore: "Learn more",
+            CmdkPlaceholder: "Search or type a command…",
+            CmdkNoResults: "No results",
+            CmdkSectionNav: "Navigation",
+            CmdkSectionProjects: "Projects",
+            CmdkSectionActions: "Actions",
+            CmdkHint: "↑↓ navigate · ↵ open · Esc close"));
 }
 
 public sealed record SkillGroup(string Title, string[] Skills, string Icon);
@@ -398,7 +422,8 @@ public sealed record FeaturedProject(
     string[] Highlights,
     string[] Technologies,
     string RepoUrl,
-    string Graphic);
+    string Graphic,
+    string Slug);
 
 public sealed record CvEntry(string Period, string Role, string Organization, string Description);
 
@@ -430,7 +455,6 @@ public sealed record ChromeCopyContent(
     string NavContact,
     string SkipLink,
     string BackToTopLabel,
-    string PrintCvLabel,
     string FooterSitemapHeading,
     string FooterLegalHeading,
     string ImpressumLabel,
@@ -445,4 +469,16 @@ public sealed record ChromeCopyContent(
     string HeroCtaProjects,
     string ViewOnGitHub,
     string ViewProject,
-    string CurrentBadge);
+    string CurrentBadge,
+    string GitHubUpdatedToday,
+    string GitHubUpdatedDaysAgo,
+    string ProjectDetailBack,
+    string ProjectDetailHighlights,
+    string ProjectDetailTechStack,
+    string ProjectDetailMore,
+    string CmdkPlaceholder,
+    string CmdkNoResults,
+    string CmdkSectionNav,
+    string CmdkSectionProjects,
+    string CmdkSectionActions,
+    string CmdkHint);

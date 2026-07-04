@@ -250,6 +250,22 @@
         });
     });
 
+    // ---------- Command-Palette (Cmd/Ctrl+K) ----------
+    function initCommandPalette(dotNetRef) {
+        if (window.__cmdkBound) return;
+        window.__cmdkBound = true;
+        document.addEventListener('keydown', e => {
+            const key = e.key.toLowerCase();
+            if ((e.ctrlKey || e.metaKey) && key === 'k') {
+                e.preventDefault();
+                dotNetRef.invokeMethodAsync('Toggle');
+            } else if (key === 'escape') {
+                dotNetRef.invokeMethodAsync('CloseIfOpen');
+            }
+        });
+    }
+    window.initCommandPalette = initCommandPalette;
+
     // ---------- Back-to-top ----------
     function initBackToTop() {
         const btn = document.querySelector('[data-back-to-top]');

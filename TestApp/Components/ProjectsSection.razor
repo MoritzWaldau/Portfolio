@@ -13,6 +13,7 @@
                     <div class="col-lg-7">
                         <span class="featured-kicker">@project.Kicker</span>
                         <h3 class="h3 card-title">@project.Title</h3>
+                        <GitHubActivityBadge Repo="@RepoPath(project)" />
                         <p class="card-text">@project.Description</p>
                         <ul class="feature-list">
                             @foreach (var (highlight, hIndex) in project.Highlights.Select((h, i) => (h, i)))
@@ -33,10 +34,13 @@
                             <svg viewBox="0 0 16 16" width="16" height="16" class="me-2" style="fill:currentColor;vertical-align:-2px" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
                             @SiteContent.Current.Chrome.ViewOnGitHub
                         </a>
+                        <a class="btn btn-outline-primary ms-2" href="@("/projekte/" + project.Slug)">
+                            @SiteContent.Current.Chrome.ProjectDetailMore →
+                        </a>
                     </div>
                     <div class="col-lg-5 d-none d-lg-block">
                         <div class="project-graphic" aria-hidden="true">
-                            @GraphicFor(project.Graphic)
+                            @ProjectGraphics.Render(project.Graphic)
                         </div>
                     </div>
                 </div>
@@ -76,35 +80,5 @@
 
     public void Dispose() => SiteContent.LanguageChanged -= StateHasChanged;
 
-    private static MarkupString GraphicFor(string kind) => new(kind switch
-    {
-        "orderSphere" =>
-            """
-            <svg viewBox="0 0 320 220" width="100%" height="220">
-                <path class="link" d="M60 110 L140 60 M60 110 L140 110 M60 110 L140 160" />
-                <path class="link" d="M140 60 L240 40 M140 60 L240 90 M140 110 L240 90 M140 110 L240 130 M140 160 L240 130 M140 160 L240 180" />
-                <rect class="node" x="30" y="90" width="60" height="40" rx="8" />
-                <rect class="node" x="110" y="42" width="60" height="36" rx="8" />
-                <rect class="node" x="110" y="92" width="60" height="36" rx="8" />
-                <rect class="node" x="110" y="142" width="60" height="36" rx="8" />
-                <circle class="pulse" cx="240" cy="40" r="7" />
-                <circle class="pulse" cx="240" cy="90" r="7" />
-                <circle class="pulse" cx="240" cy="130" r="7" />
-                <circle class="pulse" cx="240" cy="180" r="7" />
-            </svg>
-            """,
-        "employeeManagement" =>
-            """
-            <svg viewBox="0 0 320 140" width="100%" height="140">
-                <path class="link" d="M55 70 L115 70 M170 70 L230 70 M285 70 L285 70" />
-                <path class="link" d="M55 70 H285" />
-                <rect class="node" x="15" y="45" width="80" height="50" rx="8" />
-                <rect class="node" x="130" y="45" width="80" height="50" rx="8" />
-                <rect class="node" x="245" y="45" width="60" height="50" rx="8" />
-                <circle class="pulse" cx="112" cy="70" r="6" />
-                <circle class="pulse" cx="227" cy="70" r="6" />
-            </svg>
-            """,
-        _ => "",
-    });
+    private static string RepoPath(FeaturedProject project) => project.RepoUrl.Replace("https://github.com/", "");
 }
