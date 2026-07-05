@@ -87,16 +87,16 @@
         var c = SiteContent.Current;
         var items = new List<CmdItem>
         {
-            new(c.Chrome.NavAbout, c.Chrome.CmdkSectionNav, IconSection, () => GoTo("/#ueber-mich")),
-            new(c.Chrome.NavSkills, c.Chrome.CmdkSectionNav, IconSection, () => GoTo("/#skills")),
-            new(c.Chrome.NavProjects, c.Chrome.CmdkSectionNav, IconSection, () => GoTo("/#projekte")),
-            new(c.Chrome.NavCareer, c.Chrome.CmdkSectionNav, IconSection, () => GoTo("/#werdegang")),
-            new(c.Chrome.NavContact, c.Chrome.CmdkSectionNav, IconSection, () => GoTo("/#kontakt")),
+            new(c.Chrome.NavAbout, c.Chrome.CmdkSectionNav, IconSection, () => GoTo("#ueber-mich")),
+            new(c.Chrome.NavSkills, c.Chrome.CmdkSectionNav, IconSection, () => GoTo("#skills")),
+            new(c.Chrome.NavProjects, c.Chrome.CmdkSectionNav, IconSection, () => GoTo("#projekte")),
+            new(c.Chrome.NavCareer, c.Chrome.CmdkSectionNav, IconSection, () => GoTo("#werdegang")),
+            new(c.Chrome.NavContact, c.Chrome.CmdkSectionNav, IconSection, () => GoTo("#kontakt")),
         };
 
         foreach (var project in c.FeaturedProjects)
         {
-            items.Add(new(project.Title, c.Chrome.CmdkSectionProjects, IconProject, () => GoTo($"/projekte/{project.Slug}")));
+            items.Add(new(project.Title, c.Chrome.CmdkSectionProjects, IconProject, () => GoTo($"projekte/{project.Slug}")));
         }
 
         items.Add(new(SiteContent.IsEnglish ? "Deutsch" : "English", c.Chrome.CmdkSectionActions, IconLang, ToggleLanguage));
