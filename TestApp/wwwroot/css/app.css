@@ -1,3 +1,21 @@
+/* Self-hosted Variable Fonts (DSGVO-freundlich, kein Google-CDN):
+   Inter für Fließtext, Space Grotesk für Headlines & Markenelemente. */
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/inter-latin-wght-normal.woff2') format('woff2-variations');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Space Grotesk';
+    src: url('../fonts/space-grotesk-latin-wght-normal.woff2') format('woff2-variations');
+    font-weight: 300 700;
+    font-style: normal;
+    font-display: swap;
+}
+
 :root {
     color-scheme: dark;
 
@@ -54,8 +72,14 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Headlines & Markenelemente in Space Grotesk — Fließtext bleibt Inter */
+h1, h2, h3, h4, h5, h6,
+.navbar-brand, .brand-mark, .stat-value, .nf-code {
+    font-family: 'Space Grotesk', 'Inter', 'Segoe UI', sans-serif;
+}
+
 html, body {
-    font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background-color: var(--color-bg);
     color: var(--color-text);
     /* Reveal-Transforms (translateX ±40px) ragen vor dem Einblenden über den
@@ -638,28 +662,6 @@ button:focus-visible,
     color: var(--color-heading);
 }
 
-/* Tilt-Karten: Transform setzt JS, hier nur sanfter Übergang */
-.tilt {
-    will-change: transform;
-}
-
-/* Glare-Lichtfleck folgt der Maus (Variablen setzt js/site.js) */
-.tilt::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    background: radial-gradient(circle at var(--glare-x, 50%) var(--glare-y, 50%),
-                rgba(138, 185, 255, 0.20) 0%, transparent 45%);
-    opacity: 0;
-    transition: opacity 0.3s var(--ease-material);
-}
-
-.tilt:hover::before {
-    opacity: 1;
-}
-
 /* ---------- Spotlight-Karten (pointer-getrackter Radial-Glow, JS setzt --spot-x/--spot-y) ---------- */
 
 .spot-card {
@@ -833,23 +835,6 @@ button:focus-visible,
     background: linear-gradient(90deg, var(--color-accent), #7ddcff, #b4a6ff);
     transform-origin: left;
     transform: scaleX(0);
-}
-
-/* ---------- Cursor-Glow (Element erzeugt js/site.js) ---------- */
-
-#cursor-glow {
-    position: fixed;
-    left: -180px;
-    top: -180px;
-    width: 360px;
-    height: 360px;
-    border-radius: 50%;
-    z-index: 900;
-    pointer-events: none;
-    background: radial-gradient(circle,
-                rgba(47, 129, 247, 0.10) 0%,
-                rgba(125, 220, 255, 0.05) 40%,
-                transparent 70%);
 }
 
 /* ---------- rotierender Conic-Gradient-Rahmen (Kontakt-Button) ---------- */
@@ -1516,7 +1501,6 @@ button:focus-visible,
     }
 
     .tw-caret,
-    #cursor-glow,
     .glow-border::before,
     .gradient-border,
     .nf-code,
@@ -1633,7 +1617,6 @@ button:focus-visible,
     .project-graphic,
     .code-window,
     .skip-link,
-    #cursor-glow,
     #scroll-progress,
     .btn,
     .glow-border,

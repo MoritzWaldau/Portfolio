@@ -209,24 +209,6 @@
         }
     }, { threshold: 0.4 });
 
-    // ---------- Tilt + Glare für Karten ----------
-    function attachTilt(card) {
-        if (card.dataset.tiltBound) return;
-        card.dataset.tiltBound = 'true';
-        card.addEventListener('pointermove', e => {
-            const rect = card.getBoundingClientRect();
-            const px = (e.clientX - rect.left) / rect.width;
-            const py = (e.clientY - rect.top) / rect.height;
-            card.style.transform =
-                `perspective(800px) rotateX(${(-(py - 0.5) * 7).toFixed(2)}deg) rotateY(${((px - 0.5) * 7).toFixed(2)}deg) translateY(-6px)`;
-            card.style.setProperty('--glare-x', (px * 100).toFixed(1) + '%');
-            card.style.setProperty('--glare-y', (py * 100).toFixed(1) + '%');
-        });
-        card.addEventListener('pointerleave', () => {
-            card.style.transform = '';
-        });
-    }
-
     // ---------- Spotlight-Karten (Radial-Glow folgt dem Zeiger) ----------
     function attachSpotlight(card) {
         if (card.dataset.spotBound || !finePointer) return;
@@ -312,28 +294,6 @@
         ripple.addEventListener('animationend', () => ripple.remove());
     });
 
-    // ---------- Cursor-Glow ----------
-    const glow = { el: null, x: -500, y: -500, tx: -500, ty: -500 };
-
-    function initCursorGlow() {
-        if (reducedMotion || !finePointer || glow.el) return;
-        glow.el = document.createElement('div');
-        glow.el.id = 'cursor-glow';
-        glow.el.setAttribute('aria-hidden', 'true');
-        document.body.appendChild(glow.el);
-        window.addEventListener('pointermove', e => {
-            glow.tx = e.clientX;
-            glow.ty = e.clientY;
-        });
-    }
-
-    function drawCursorGlow() {
-        if (!glow.el) return;
-        glow.x += (glow.tx - glow.x) * 0.12;                 // Lerp-Nachlauf
-        glow.y += (glow.ty - glow.y) * 0.12;
-        glow.el.style.transform = `translate(${glow.x.toFixed(1)}px, ${glow.y.toFixed(1)}px)`;
-    }
-
     // ---------- Scroll-Effekte: Navbar, Progress, Parallax, Timeline, Scrollspy ----------
     let progressBar = null;
 
@@ -410,10 +370,9 @@
         });
     }, { passive: true });
 
-    // ---------- zentraler rAF-Loop (Canvas + Cursor-Glow) ----------
+    // ---------- zentraler rAF-Loop (Partikel-Canvas) ----------
     function loop() {
         drawParticles();
-        drawCursorGlow();
         requestAnimationFrame(loop);
     }
     if (!reducedMotion) requestAnimationFrame(loop);
@@ -422,7 +381,6 @@
     function scan(root) {
         if (!root.querySelectorAll) return;
         registerReveals(root);
-        root.querySelectorAll('.tilt').forEach(attachTilt);
         root.querySelectorAll('.spot-card').forEach(attachSpotlight);
         root.querySelectorAll('[data-typewriter]').forEach(initTypewriter);
         root.querySelectorAll('.split-letters').forEach(splitLetters);
@@ -444,7 +402,6 @@
     }).observe(document.body, { childList: true, subtree: true });
 
     initProgressBar();
-    initCursorGlow();
     scan(document);
 
     // Test-/Debug-Zugriff (z.B. für Verifikation in der Preview)

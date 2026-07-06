@@ -52,7 +52,7 @@
             @foreach (var (project, index) in SiteContent.Current.Projects.Select((p, i) => (p, i)))
             {
                 <div class="col-md-4 reveal" style="--reveal-delay: @index">
-                    <div class="card tilt h-100">
+                    <div class="card spot-card h-100">
                         <div class="card-body d-flex flex-column">
                             <h3 class="card-title h5">@project.Title</h3>
                             <p class="card-text flex-grow-1">@project.Description</p>
