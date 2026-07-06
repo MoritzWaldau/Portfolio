@@ -18,9 +18,12 @@
             </div>
             <div class="col-md-4 text-center hero-anim hero-anim-5">
                 <div class="hero-portrait-wrap">
-                    <div class="hero-portrait">
-                        <img src="@SiteContent.PortraitPath" alt="Porträt von @SiteContent.Name"
-                             onerror="this.closest('.hero-portrait').classList.add('no-photo')" />
+                    <div class="hero-portrait @(SiteContent.IsProvided(SiteContent.PortraitPath) ? "" : "no-photo")">
+                        @if (SiteContent.IsProvided(SiteContent.PortraitPath))
+                        {
+                            <img src="@SiteContent.PortraitPath" alt="Porträt von @SiteContent.Name"
+                                 onerror="this.closest('.hero-portrait').classList.add('no-photo')" />
+                        }
                         <span class="hero-initials" aria-hidden="true">@Initials</span>
                     </div>
                 </div>

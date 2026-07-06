@@ -8,10 +8,12 @@
             <span class="brand-mark" aria-hidden="true">MW</span>
             <span>@SiteContent.Name</span>
         </a>
-        <button title="Navigation öffnen" class="navbar-toggler" @onclick="ToggleNavMenu">
+        @* Auf/Zu übernimmt js/site.js — so funktioniert das Menü schon, bevor Blazor WASM geladen ist. *@
+        <button type="button" title="Navigation öffnen" class="navbar-toggler"
+                aria-expanded="false" aria-controls="site-nav-collapse">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="@NavMenuCssClass navbar-collapse" @onclick="CollapseNavMenu">
+        <div id="site-nav-collapse" class="collapse navbar-collapse">
             <ul class="navbar-nav ms-auto align-items-md-center">
                 <li class="nav-item"><a class="nav-link" href="#ueber-mich">@SiteContent.Current.Chrome.NavAbout</a></li>
                 <li class="nav-item"><a class="nav-link" href="#skills">@SiteContent.Current.Chrome.NavSkills</a></li>
@@ -19,7 +21,7 @@
                 <li class="nav-item"><a class="nav-link" href="#werdegang">@SiteContent.Current.Chrome.NavCareer</a></li>
                 <li class="nav-item"><a class="nav-link nav-cta" href="#kontakt">@SiteContent.Current.Chrome.NavContact</a></li>
                 <li class="nav-item">
-                    <button type="button" class="lang-switch" @onclick="ToggleLanguage" @onclick:stopPropagation="true"
+                    <button type="button" class="lang-switch" @onclick="ToggleLanguage"
                             aria-label="Sprache wechseln / Switch language">
                         <span class="@(SiteContent.IsEnglish ? "" : "is-active")">DE</span>
                         <span class="@(SiteContent.IsEnglish ? "is-active" : "")">EN</span>
@@ -31,14 +33,6 @@
 </nav>
 
 @code {
-    private bool collapseNavMenu = true;
-
-    private string NavMenuCssClass => collapseNavMenu ? "collapse" : "collapse show";
-
-    private void ToggleNavMenu() => collapseNavMenu = !collapseNavMenu;
-
-    private void CollapseNavMenu() => collapseNavMenu = true;
-
     protected override void OnInitialized() => SiteContent.LanguageChanged += StateHasChanged;
 
     public void Dispose() => SiteContent.LanguageChanged -= StateHasChanged;

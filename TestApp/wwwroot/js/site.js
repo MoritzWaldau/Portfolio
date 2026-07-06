@@ -238,6 +238,26 @@
         });
     }
 
+    // ---------- Mobiles Hamburger-Menü ----------
+    // Läuft bewusst ohne Blazor (delegierte Listener): so reagiert die Navigation
+    // sofort, auch während WASM noch lädt.
+    function setNavMenu(open) {
+        const collapse = document.querySelector('.site-navbar .navbar-collapse');
+        const toggler = document.querySelector('.site-navbar .navbar-toggler');
+        if (!collapse || !toggler) return;
+        collapse.classList.toggle('show', open);
+        toggler.setAttribute('aria-expanded', String(open));
+    }
+
+    document.addEventListener('click', e => {
+        if (e.target.closest('.site-navbar .navbar-toggler')) {
+            const collapse = document.querySelector('.site-navbar .navbar-collapse');
+            setNavMenu(!(collapse && collapse.classList.contains('show')));
+        } else if (e.target.closest('.site-navbar .nav-link')) {
+            setNavMenu(false);
+        }
+    });
+
     // ---------- Copy-to-Clipboard (z.B. E-Mail-Button im Kontaktbereich) ----------
     document.addEventListener('click', e => {
         const btn = e.target.closest('[data-copy]');

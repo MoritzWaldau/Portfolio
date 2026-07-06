@@ -58,6 +58,9 @@ html, body {
     font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background-color: var(--color-bg);
     color: var(--color-text);
+    /* Reveal-Transforms (translateX ±40px) ragen vor dem Einblenden über den
+       Viewport hinaus — ohne clip lässt sich die Seite mobil seitlich schieben. */
+    overflow-x: clip;
 }
 
 h1:focus {
@@ -1311,6 +1314,14 @@ button:focus-visible,
     color: var(--color-heading);
     box-shadow: var(--glow-sm);
     transform: translateY(-2px);
+}
+
+/* Ohne Tastatur nutzlos — auf Touch-Geräten und schmalen Viewports ausblenden
+   (überlappt sonst die Stats-Karten) */
+@media (hover: none), (pointer: coarse), (max-width: 767.98px) {
+    .cmdk-trigger {
+        display: none;
+    }
 }
 
 .cmdk-trigger kbd {

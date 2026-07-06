@@ -63,13 +63,14 @@
         <span class="dismiss">🗙</span>
     </div>
     <script>
-        // Scrollt zur Sektion mit der angegebenen Id; wartet kurz, falls die Seite noch rendert.
+        // Scrollt zur Sektion mit der angegebenen Id; wartet, falls die Seite noch rendert.
+        // 40 Versuche à 250ms (~10s) decken auch den langsamen WASM-Start auf Handys ab.
         window.scrollToFragment = function (id, attempt) {
             const el = document.getElementById(id);
             if (el) {
                 el.scrollIntoView({ behavior: 'smooth' });
-            } else if ((attempt ?? 0) < 10) {
-                setTimeout(() => window.scrollToFragment(id, (attempt ?? 0) + 1), 100);
+            } else if ((attempt ?? 0) < 40) {
+                setTimeout(() => window.scrollToFragment(id, (attempt ?? 0) + 1), 250);
             }
         };
         // Für die Sprach-Erkennung beim ersten Start (siehe MainLayout.razor).
@@ -86,9 +87,19 @@
     <script>navigator.serviceWorker.register('service-worker.js', { updateViaCache: 'none' });</script>
 
     <!-- Cookielose Reichweitenmessung (GoatCounter). Erst aktiv, sobald ein echter
-         Site-Code (siehe https://www.goatcounter.com) den Platzhalter ersetzt. -->
-    <script data-goatcounter="https://[PLATZHALTER-GOATCOUNTER-CODE].goatcounter.com/count"
-            async src="//gc.zgo.at/count.js"></script>
+         Site-Code (siehe https://www.goatcounter.com) den Platzhalter ersetzt —
+         solange der Platzhalter drin steht, wird das Script gar nicht erst geladen. -->
+    <script>
+        (function () {
+            const code = '[PLATZHALTER-GOATCOUNTER-CODE]';
+            if (code.includes('PLATZHALTER')) return;
+            const s = document.createElement('script');
+            s.async = true;
+            s.src = '//gc.zgo.at/count.js';
+            s.dataset.goatcounter = 'https://' + code + '.goatcounter.com/count';
+            document.body.appendChild(s);
+        })();
+    </script>
 </body>
 
 </html>

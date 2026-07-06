@@ -10,8 +10,8 @@ public static class SiteContent
 {
     public const string Name = "Moritz Waldau";
 
-    /// <summary>Pfad relativ zu wwwroot; Datei dort ablegen oder leer lassen, dann wird ein Initialen-Avatar gezeigt.</summary>
-    public const string PortraitPath = "img/portrait.jpg";
+    /// <summary>Pfad relativ zu wwwroot (z.B. "img/portrait.jpg"); Datei dort ablegen oder leer lassen, dann wird ein Initialen-Avatar gezeigt.</summary>
+    public const string PortraitPath = "";
 
     public const string Email = "moritzwaldau99@gmail.com";
     public const string GitHubUrl = "https://github.com/MoritzWaldau";
@@ -93,7 +93,7 @@ public sealed record Content(
         Stats:
         [
             new(5, "+", "Jahre Agile Softwareentwicklung", "calendar"),
-            new(100, "K +", "Nutzer Anwendung betreut", "users"),
+            new(100, "K+", "Nutzer Anwendung betreut", "users"),
             new(5, "+", "Technologien im Stack", "layers"),
             new(2, "", "Cloud-Plattformen (AWS & Azure)", "cloud"),
         ],
@@ -232,6 +232,7 @@ public sealed record Content(
             ViewProject: "Zum Projekt",
             CurrentBadge: "Aktuell",
             GitHubUpdatedToday: "heute aktualisiert",
+            GitHubUpdatedYesterday: "gestern aktualisiert",
             GitHubUpdatedDaysAgo: "vor {0} Tagen aktualisiert",
             ProjectDetailBack: "← Zurück zu den Projekten",
             ProjectDetailHighlights: "Highlights",
@@ -271,7 +272,7 @@ public sealed record Content(
         Stats:
         [
             new(5, "+", "Years of Agile Software Development", "calendar"),
-            new(100, "K +", "Users of Applications Maintained", "users"),
+            new(100, "K+", "Users of Applications Maintained", "users"),
             new(5, "+", "Technologies in the Stack", "layers"),
             new(2, "", "Cloud Platforms (AWS & Azure)", "cloud"),
         ],
@@ -406,6 +407,7 @@ public sealed record Content(
             ViewProject: "View Project",
             CurrentBadge: "Current",
             GitHubUpdatedToday: "updated today",
+            GitHubUpdatedYesterday: "updated yesterday",
             GitHubUpdatedDaysAgo: "updated {0} days ago",
             ProjectDetailBack: "← Back to Projects",
             ProjectDetailHighlights: "Highlights",
@@ -480,6 +482,7 @@ public sealed record ChromeCopyContent(
     string ViewProject,
     string CurrentBadge,
     string GitHubUpdatedToday,
+    string GitHubUpdatedYesterday,
     string GitHubUpdatedDaysAgo,
     string ProjectDetailBack,
     string ProjectDetailHighlights,

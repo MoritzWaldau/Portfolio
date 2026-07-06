@@ -11,13 +11,18 @@ const cacheName = `${cacheNamePrefix}${self.assetsManifest.version}`;
 const offlineAssetsInclude = [ /\.dll$/, /\.pdb$/, /\.wasm/, /\.html/, /\.js$/, /\.json$/, /\.css$/, /\.woff$/, /\.png$/, /\.jpe?g$/, /\.gif$/, /\.ico$/, /\.blat$/, /\.dat$/, /\.webmanifest$/ ];
 const offlineAssetsExclude = [ /^service-worker\.js$/ ];
 
-// Replace with your base path if you are hosting on a subfolder. Ensure there is a trailing '/'.
-const base = "/";
+// Basis-Pfad aus dem Skript-Standort ableiten — funktioniert lokal ("/") wie
+// auf GitHub Pages ("/Portfolio/"), ohne dass der Deploy-Workflow patchen muss.
+const base = self.location.pathname.replace(/[^/]*$/, '');
 const baseUrl = new URL(base, self.origin);
 const manifestUrlList = self.assetsManifest.assets.map(asset => new URL(asset.url, baseUrl).href);
 
 async function onInstall(event) {
     console.info('Service worker: Install');
+
+    // Neue Version sofort aktivieren statt zu warten, bis alle Tabs geschlossen
+    // sind — sonst hängen Handys nach einem Deploy auf der alten Version fest.
+    self.skipWaiting();
 
     // Fetch and cache all matching items from the assets manifest
     const assetsRequests = self.assetsManifest.assets
@@ -35,6 +40,9 @@ async function onActivate(event) {
     await Promise.all(cacheKeys
         .filter(key => key.startsWith(cacheNamePrefix) && key !== cacheName)
         .map(key => caches.delete(key)));
+
+    // Auch bereits offene Seiten sofort von diesem Worker bedienen lassen.
+    await self.clients.claim();
 }
 
 async function onFetch(event) {
