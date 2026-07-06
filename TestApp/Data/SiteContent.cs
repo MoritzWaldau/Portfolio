@@ -38,7 +38,8 @@ public static class SiteContent
     }
 
     /// <summary>True, sobald der Wert kein [PLATZHALTER] mehr ist — Komponenten blenden unausgefüllte Teile aus.</summary>
-    public static bool IsProvided(string value) => !value.StartsWith("[PLATZHALTER", StringComparison.Ordinal);
+    public static bool IsProvided(string value) =>
+        !string.IsNullOrWhiteSpace(value) && !value.StartsWith("[PLATZHALTER", StringComparison.Ordinal);
 
     /// <summary>Bleibt bewusst Deutsch-only (Impressumspflicht nach § 5 DDG).</summary>
     public static class Impressum
